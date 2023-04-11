@@ -1,4 +1,5 @@
 #include "binary_trees.h"
+#include <stdio.h>
 /**
  * binary_tree_insert_left - insert node to the left
  *
@@ -9,9 +10,12 @@
  */
 binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 {
+	if (parent == NULL)
+		return (NULL);
+
 	binary_tree_t *new_tree_node = malloc(sizeof(binary_tree_t));
 
-	if (new_tree_node == NULL || parent == NULL)
+	if (new_tree_node == NULL)
 		return (NULL);
 
 	new_tree_node->n = value;
@@ -26,7 +30,7 @@ binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 	else
 	{
 		new_tree_node->left = parent->left;
-		new_tree_node->left->parent = new_tree_node;
+		parent->left->parent = new_tree_node;
 		parent->left = new_tree_node;
 	}
 	return (new_tree_node);
